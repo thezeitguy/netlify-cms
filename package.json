@@ -7,7 +7,7 @@
     "start": "webpack-dev-server -d --inline --config webpack.config.js",
     "test": "NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
     "test:watch": "npm test -- --watch",
-    "build": "cp -R example/ dist/ && webpack --config webpack.config.js",
+    "build": "cp -R example/ dist/ && cp _redirects dist/_redirects && webpack --config webpack.config.js",
     "storybook": "start-storybook -p 9001",
     "storybook-build": "build-storybook -o dist"
   },
