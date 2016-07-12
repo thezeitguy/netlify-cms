@@ -1,2 +1,2 @@
-Command = "npm run storybook-build"
+Command = "npm run build"
 Publish = "dist"
