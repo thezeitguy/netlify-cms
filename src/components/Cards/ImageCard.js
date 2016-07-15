@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Card } from '../UI';
+import styles from './ImageCard.css'
 
 export default class ImageCard extends React.Component {
   constructor(props) {
@@ -34,8 +35,8 @@ export default class ImageCard extends React.Component {
   render() {
     const { onClick, image, text } = this.props;
     return (
-      <Card onClick={onClick}>
-        <img src={image} />
+      <Card onClick={onClick} className={styles.root}>
+        {image ? <img src={image} /> : null}
         <h1>{text}</h1>
       </Card>
     );
@@ -43,7 +44,7 @@ export default class ImageCard extends React.Component {
 }
 
 ImageCard.propTypes = {
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   onClick: PropTypes.func,
   onImageLoaded: PropTypes.func,
   text: PropTypes.string.isRequired

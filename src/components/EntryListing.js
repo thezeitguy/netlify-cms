@@ -1,7 +1,7 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Bricks from 'bricks.js'
-import { browserHistory } from 'react-router';
+import Bricks from 'bricks.js';
+import history from '../routing/history';
 import Cards from './Cards';
 
 export default class EntryListing extends React.Component {
@@ -12,12 +12,13 @@ export default class EntryListing extends React.Component {
     this.bricksConfig = {
       packed: 'data-packed',
       sizes: [
-        { columns: 2, gutter: 15 },
-        { mq: '780px', columns: 3, gutter: 15 },
-        { mq: '1035px', columns: 4, gutter: 15 },
-        { mq: '1290px', columns: 5, gutter: 15 },
-        { mq: '1545px', columns: 6, gutter: 15 },
-        { mq: '1800px', columns: 7, gutter: 15 },
+        { columns: 1, gutter: 15 },
+        { mq: '495px', columns: 2, gutter: 15 },
+        { mq: '750px', columns: 3, gutter: 15 },
+        { mq: '1005px', columns: 4, gutter: 15 },
+        { mq: '1260px', columns: 5, gutter: 15 },
+        { mq: '1515px', columns: 6, gutter: 15 },
+        { mq: '1770px', columns: 7, gutter: 15 },
       ]
     };
   }
@@ -56,7 +57,7 @@ export default class EntryListing extends React.Component {
     return React.createElement(card, {
       key: entry.get('slug'),
       collection: collection,
-      onClick: browserHistory.push.bind(this, link),
+      onClick: history.push.bind(this, link),
       onImageLoaded: () => this.bricksInstance.pack(),
       text: entry.getIn(['data', collection.getIn(['card', 'text'])]),
       image: entry.getIn(['data', collection.getIn(['card', 'image'])]),
@@ -68,7 +69,7 @@ export default class EntryListing extends React.Component {
     const name = collection.get('name');
 
     return <div>
-      <h2>Listing {name}</h2>
+      <h1>Listing {name}</h1>
       <div ref={(c) => this._entries = c}>
         {entries.map((entry) => {
           const path = `/collections/${name}/entries/${entry.get('slug')}`;
