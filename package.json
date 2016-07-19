@@ -74,6 +74,7 @@
     "draft-js-import-markdown": "^0.1.6",
     "fuzzy": "^0.1.1",
     "history": "^2.1.2",
+    "js-base64": "^2.1.9",
     "json-loader": "^0.5.4",
     "localforage": "^1.4.2",
     "lodash": "^4.13.1"
