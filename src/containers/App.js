@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { loadConfig } from '../actions/config';
 import { loginUser } from '../actions/auth';
 import { currentBackend } from '../backends/backend';
-import { SHOW_COLLECTION, CREATE_COLLECTION, HELP } from '../actions/findbar';
+import { SHOW_COLLECTION, CREATE_COLLECTION, HELP, SHOW_MORE } from '../actions/findbar';
 import FindBar from './FindBar';
 import styles from './App.css';
 import pluralize from 'pluralize';
@@ -64,7 +64,7 @@ class App extends React.Component {
         payload: { collectionName:collection.get('name') }
       });
 
-      if (defaultCommands.length < 5) defaultCommands.push(`show_${collection.get('name')}`);
+      if (defaultCommands.length < 4) defaultCommands.push(`show_${collection.get('name')}`);
 
       if (collection.get('create') === true) {
         commands.push({
@@ -74,10 +74,13 @@ class App extends React.Component {
           payload: { collectionName:collection.get('name') }
         });
       }
+      if (defaultCommands.length < 4) defaultCommands.push(`create_${collection.get('name')}`);
     });
 
     commands.push({ id: HELP, type: HELP, pattern: 'Help' });
+    commands.push({ id: SHOW_MORE, type: SHOW_MORE, pattern: 'More Commands...' });
     defaultCommands.push(HELP);
+    defaultCommands.push(SHOW_MORE);
 
     return { commands, defaultCommands };
   }

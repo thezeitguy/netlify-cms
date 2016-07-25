@@ -5,10 +5,9 @@ import styles from './ImageCard.css';
 export default class ImageCard extends React.Component {
 
   render() {
-    const { onClick, onImageLoaded, image, text, description } = this.props;
-    console.log(this.props)
+    const { onClick, onImageLoaded, image, text, description, className='' } = this.props;
     return (
-      <Card onClick={onClick} className={styles.root}>
+      <Card onClick={onClick} className={`${styles.root} ${className}`}>
         <img src={image} onLoad={onImageLoaded} />
         <h1>{text}</h1>
 

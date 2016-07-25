@@ -4,6 +4,7 @@ import { SEARCH } from '../containers/FindBar';
 export const RUN_COMMAND = 'RUN_COMMAND';
 export const SHOW_COLLECTION = 'SHOW_COLLECTION';
 export const CREATE_COLLECTION = 'CREATE_COLLECTION';
+export const SHOW_MORE = 'SHOW_MORE';
 export const HELP = 'HELP';
 
 export function run(commandName, payload) {
@@ -21,6 +22,9 @@ export function runCommand(commandName, payload) {
         break;
       case HELP:
         window.alert('Find Bar Help (PLACEHOLDER)\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit.');
+        break;
+      case SHOW_MORE:
+        window.alert('Find Bar More Commands (PLACEHOLDER)\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit.');
         break;
       case SEARCH:
         history.push('/search');

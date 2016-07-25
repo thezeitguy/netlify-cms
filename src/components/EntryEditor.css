@@ -14,3 +14,15 @@
   max-width: 100%;
   height: auto;
 }
+
+.close {
+  position:absolute;
+  right: -11px;
+  top: -30px;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.rootCard {
+  width: 100% !important;
+}

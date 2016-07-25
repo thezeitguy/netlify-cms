@@ -11,12 +11,14 @@ import {
 import { addMedia, removeMedia } from '../actions/media';
 import { selectEntry, getMedia } from '../reducers';
 import EntryEditor from '../components/EntryEditor';
+import history from '../routing/history';
 
 class EntryPage extends React.Component {
   constructor(props) {
     super(props);
     this.props.loadEntry(props.collection, props.slug);
     this.handlePersistEntry = this.handlePersistEntry.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +35,12 @@ class EntryPage extends React.Component {
 
   componentWillUnmount() {
     this.props.discardDraft();
+  }
+
+  handleClose() {
+    console.log("Handling close");
+    //history.goBack();
+
   }
 
   handlePersistEntry() {
@@ -54,6 +62,7 @@ class EntryPage extends React.Component {
           getMedia={boundGetMedia}
           collection={collection}
           onChange={changeDraft}
+          onClose={()=>{history.goBack()}}
           onAddMedia={addMedia}
           onRemoveMedia={removeMedia}
           onPersist={this.handlePersistEntry}
