@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 export default function StringPreview({ value }) {
-  return <span>{value}</span>;
+  return <h2>{value}</h2>;
 }
 
 StringPreview.propTypes = {

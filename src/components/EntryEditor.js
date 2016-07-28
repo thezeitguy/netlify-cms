@@ -7,11 +7,10 @@ import cssStyles from './EntryEditor.css';
 
 export default function EntryEditor({ collection, entry, getMedia, onChange, onClose, onAddMedia, onRemoveMedia, onPersist }) {
   return <Card className={cssStyles.rootCard}>
-    <h1>Entry in {collection.get('label')}</h1>
-    <h2>{entry && entry.get('title')}</h2>
     <div className={`cms-container ${cssStyles.root}`} style={styles.container}>
 
       <div className="cms-control-pane" style={styles.paneLeft}>
+        <h1 className={cssStyles.title}>Edit</h1>
         <ControlPane
             collection={collection}
             entry={entry}
@@ -21,7 +20,8 @@ export default function EntryEditor({ collection, entry, getMedia, onChange, onC
             onRemoveMedia={onRemoveMedia}
         />
       </div>
-      <div className="cms-preview-pane" style={styles.paneRight}>
+      <div className={cssStyles.previewPane} style={styles.paneRight}>
+        <h1 className={cssStyles.title}>Preview</h1>
         <div onClick={onClose} className={cssStyles.close}><Icon type="cancel" /></div>
         <PreviewPane collection={collection} entry={entry} getMedia={getMedia} />
       </div>
@@ -36,11 +36,13 @@ const styles = {
   },
   paneLeft: {
     width: '50%',
-    marginRight: 15
+    marginLeft: 30,
+    marginRight: 100
   },
   paneRight: {
     position:'relative',
-    width: '50%'
+    marginRight: 30,
+    width: '50%',
   }
 };
 

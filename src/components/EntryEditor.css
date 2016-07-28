@@ -2,12 +2,32 @@
   font-size: 14px;
 }
 
+.root h1.title {
+  font-weight: 300;
+  margin-bottom: 80px;
+  margin-top: 30px;
+
+}
+
 .root input {
   font-size: 14px;
+  padding: 10px;
+  margin-bottom: 10px
 }
 
 .root textarea {
   font-size: 14px;
+  line-height: 18px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.previewPane img {
+  margin: 20px 0;
+}
+.previewPane h2 {
+  font-weight: 300;
+  font-size: 18px;
+  margin-bottom: 35px;
 }
 
 .root img {
@@ -18,7 +38,8 @@
 .close {
   position:absolute;
   right: -11px;
-  top: -30px;
+  top: 23px;
+  color: #aaa;
   font-size: 35px;
   cursor: pointer;
 }

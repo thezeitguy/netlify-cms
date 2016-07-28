@@ -77,6 +77,7 @@ export default class ImageControl extends React.Component {
           onDragEnter={this.handleDragEnter}
           onDragOver={this.handleDragOver}
           onDrop={this.handleChange}
+          style={{margin:10, marginBottom: 20}}
       >
         <span onClick={this.handleClick}>
           {imageName ? imageName : 'Click or drop imag here.'}
