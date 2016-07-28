@@ -80,7 +80,7 @@ export default class ImageControl extends React.Component {
           style={{margin:10, marginBottom: 20}}
       >
         <span onClick={this.handleClick}>
-          {imageName ? imageName : 'Click or drop imag here.'}
+          {imageName ? imageName : 'Click or drop image here.'}
         </span>
         <input
             type="file"
