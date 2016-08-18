@@ -1,35 +1,85 @@
 import React, { PropTypes } from 'react';
-import { stateToMarkdown } from 'draft-js-export-markdown';
-import TextareaAutosize from 'react-autosize-textarea';
+import RawEditor from './MarkdownControlElements/RawEditor';
+import VisualEditor from './MarkdownControlElements/VisualEditor';
+import { processEditorPlugins } from './richText';
+import { connect } from 'react-redux';
+import { switchVisualMode } from '../../actions/editor';
 
-
-export default class MarkdownControl extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editorState: props.value || ''
-    };
-    this.handleChange = this.handleChange.bind(this);
+class MarkdownControl extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.useVisualEditor = this.useVisualEditor.bind(this);
+    this.useRawEditor = this.useRawEditor.bind(this);
   }
 
-  handleChange(editorState) {
-    const content = editorState.getCurrentContent();
-    this.setState({ editorState });
-    this.props.onChange(stateToMarkdown(content));
+  componentWillMount() {
+    processEditorPlugins(this.context.plugins.editor);
+  }
+
+  useVisualEditor() {
+    this.props.switchVisualMode(true);
+  }
+
+  useRawEditor() {
+    this.props.switchVisualMode(false);
+  }
+
+  renderEditor() {
+    const { editor, onChange, onAddMedia, getMedia, value } = this.props;
+    if (editor.get('useVisualMode')) {
+      return (
+        <div>
+          <button onClick={this.useRawEditor}>Switch to Raw Editor</button>
+          <VisualEditor
+              onChange={onChange}
+              onAddMedia={onAddMedia}
+              getMedia={getMedia}
+              registeredComponents={editor.get('registeredComponents')}
+              value={value}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <button onClick={this.useVisualEditor}>Switch to Visual Editor</button>
+          <RawEditor
+              onChange={onChange}
+              onAddMedia={onAddMedia}
+              getMedia={getMedia}
+              value={value}
+          />
+        </div>
+      );
+    }
   }
 
   render() {
-    const { editorState } = this.state;
     return (
-      <TextareaAutosize
-          style={{width: '100%'}}
-          value={editorState}
-          onChange={this.handleChange}
-      />);
+      <div>
+
+        { this.renderEditor() }
+      </div>
+    );
   }
 }
 
+export default MarkdownControl;
+
 MarkdownControl.propTypes = {
+  editor: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
+  onAddMedia: PropTypes.func.isRequired,
+  getMedia: PropTypes.func.isRequired,
+  switchVisualMode: PropTypes.func.isRequired,
   value: PropTypes.node,
 };
+
+MarkdownControl.contextTypes = {
+  plugins: PropTypes.object,
+};
+
+export default connect(
+  state => ({ editor: state.editor }),
+  { switchVisualMode }
+)(MarkdownControl);
