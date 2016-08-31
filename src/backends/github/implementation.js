@@ -22,7 +22,7 @@ class API {
     return cache.then((cached) => {
       if (cached) { return cached; }
 
-      return this.request(`${this.repoURL}/contents/${path}`, {
+      return this.request(`${this.repoURL}/contents/${path}?ref=${this.branch}`, {
         headers: { Accept: 'application/vnd.github.VERSION.raw' },
         body: { ref: this.branch },
         cache: false
@@ -37,7 +37,7 @@ class API {
   }
 
   listFiles(path) {
-    return this.request(`${this.repoURL}/contents/${path}`, {
+    return this.request(`${this.repoURL}/contents/${path}?ref=${this.branch}`, {
       body: { ref: this.branch }
     });
   }
@@ -188,6 +188,7 @@ export default class GitHub {
       throw 'The GitHub backend needs a "repo" in the backend configuration.';
     }
     this.repo = config.getIn(['backend', 'repo']);
+    this.branch = config.getIn(['backend', 'branch']);
   }
 
   authComponent() {
